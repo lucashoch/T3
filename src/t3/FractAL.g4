@@ -6,9 +6,9 @@ grammar FractAL;
         }
 }
 
-programa: 'inicio:' comandos 'fim.';
+programa: 'begin:' comandos 'end.';
 
-comandos: (comando)+;
+comandos: (comando ';')+;
 
 comando: declaracao |
          operacao
@@ -18,7 +18,7 @@ declaracao: tipo VAR;
 
 operacao: VAR opr;
 
-tipo: ('Triangulo' | 'Circulo' | 'Quadrado');
+tipo: ('Triangle' | 'Circle' | 'Square');
 
 opr: ('repeat' | 'offsetRepeat') '(' NUM ',' NUM ')';
 
@@ -34,7 +34,7 @@ NUM_REAL: NUM_INT '.' NUM_INT;
 
 Comentario: '/*' (.*?) '*/' -> skip;
 
-Comentario_Linha: '//' (.*?) '/n';
+Comentario_Linha:  '#' ~( '\r' | '\n' )* -> skip;
 
 Espaco : [ \t\r\n]+ {skip();}      // espaço = em branco, tab, "Enter" ou nova linha, uma ou mais vezes
     ;

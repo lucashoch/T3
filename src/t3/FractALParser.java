@@ -18,7 +18,8 @@ public class FractALParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, VAR=11, NUM=12, Espaco=13, ERROR=14;
+		T__9=10, T__10=11, VAR=12, NUM=13, NUM_INT=14, NUM_REAL=15, Comentario=16, 
+		Comment=17, Espaco=18, ERROR=19;
 	public static final int
 		RULE_programa = 0, RULE_comandos = 1, RULE_comando = 2, RULE_declaracao = 3, 
 		RULE_operacao = 4, RULE_tipo = 5, RULE_opr = 6;
@@ -27,12 +28,13 @@ public class FractALParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'inicio:'", "'fim.'", "'Triangulo'", "'Circulo'", "'Quadrado'", 
+		null, "'begin:'", "'end.'", "';'", "'Triangle'", "'Circle'", "'Square'", 
 		"'repeat'", "'offsetRepeat'", "'('", "','", "')'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, null, "VAR", 
-		"NUM", "Espaco", "ERROR"
+		null, null, null, null, null, null, null, null, null, null, null, null, 
+		"VAR", "NUM", "NUM_INT", "NUM_REAL", "Comentario", "Comment", "Espaco", 
+		"ERROR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -89,11 +91,8 @@ public class FractALParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class ProgramaContext extends ParserRuleContext {
-		public List<ComandosContext> comandos() {
-			return getRuleContexts(ComandosContext.class);
-		}
-		public ComandosContext comandos(int i) {
-			return getRuleContext(ComandosContext.class,i);
+		public ComandosContext comandos() {
+			return getRuleContext(ComandosContext.class,0);
 		}
 		public ProgramaContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -117,27 +116,14 @@ public class FractALParser extends Parser {
 	public final ProgramaContext programa() throws RecognitionException {
 		ProgramaContext _localctx = new ProgramaContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_programa);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(14);
 			match(T__0);
-			setState(16); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				{
-				setState(15);
-				comandos();
-				}
-				}
-				setState(18); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << VAR))) != 0) );
-			setState(20);
+			setState(15);
+			comandos();
+			setState(16);
 			match(T__1);
 			}
 		}
@@ -181,30 +167,26 @@ public class FractALParser extends Parser {
 	public final ComandosContext comandos() throws RecognitionException {
 		ComandosContext _localctx = new ComandosContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_comandos);
+		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23); 
+			setState(21); 
 			_errHandler.sync(this);
-			_alt = 1;
+			_la = _input.LA(1);
 			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					setState(22);
-					comando();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+				{
+				{
+				setState(18);
+				comando();
+				setState(19);
+				match(T__2);
 				}
-				setState(25); 
+				}
+				setState(23); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
-			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << VAR))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -248,22 +230,22 @@ public class FractALParser extends Parser {
 		ComandoContext _localctx = new ComandoContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_comando);
 		try {
-			setState(29);
+			setState(27);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__2:
 			case T__3:
 			case T__4:
+			case T__5:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(27);
+				setState(25);
 				declaracao();
 				}
 				break;
 			case VAR:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(28);
+				setState(26);
 				operacao();
 				}
 				break;
@@ -312,9 +294,9 @@ public class FractALParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(31);
+			setState(29);
 			tipo();
-			setState(32);
+			setState(30);
 			match(VAR);
 			}
 		}
@@ -359,9 +341,9 @@ public class FractALParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
+			setState(32);
 			match(VAR);
-			setState(35);
+			setState(33);
 			opr();
 			}
 		}
@@ -403,9 +385,9 @@ public class FractALParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(37);
+			setState(35);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << T__4) | (1L << T__5))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -457,9 +439,9 @@ public class FractALParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(39);
+			setState(37);
 			_la = _input.LA(1);
-			if ( !(_la==T__5 || _la==T__6) ) {
+			if ( !(_la==T__6 || _la==T__7) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -467,16 +449,16 @@ public class FractALParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			setState(38);
+			match(T__8);
+			setState(39);
+			match(NUM);
 			setState(40);
-			match(T__7);
+			match(T__9);
 			setState(41);
 			match(NUM);
 			setState(42);
-			match(T__8);
-			setState(43);
-			match(NUM);
-			setState(44);
-			match(T__9);
+			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -491,18 +473,18 @@ public class FractALParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20\61\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\6\2\23\n\2\r\2\16"+
-		"\2\24\3\2\3\2\3\3\6\3\32\n\3\r\3\16\3\33\3\4\3\4\5\4 \n\4\3\5\3\5\3\5"+
-		"\3\6\3\6\3\6\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\2\2\t\2\4\6\b\n\f"+
-		"\16\2\4\3\2\5\7\3\2\b\t\2,\2\20\3\2\2\2\4\31\3\2\2\2\6\37\3\2\2\2\b!\3"+
-		"\2\2\2\n$\3\2\2\2\f\'\3\2\2\2\16)\3\2\2\2\20\22\7\3\2\2\21\23\5\4\3\2"+
-		"\22\21\3\2\2\2\23\24\3\2\2\2\24\22\3\2\2\2\24\25\3\2\2\2\25\26\3\2\2\2"+
-		"\26\27\7\4\2\2\27\3\3\2\2\2\30\32\5\6\4\2\31\30\3\2\2\2\32\33\3\2\2\2"+
-		"\33\31\3\2\2\2\33\34\3\2\2\2\34\5\3\2\2\2\35 \5\b\5\2\36 \5\n\6\2\37\35"+
-		"\3\2\2\2\37\36\3\2\2\2 \7\3\2\2\2!\"\5\f\7\2\"#\7\r\2\2#\t\3\2\2\2$%\7"+
-		"\r\2\2%&\5\16\b\2&\13\3\2\2\2\'(\t\2\2\2(\r\3\2\2\2)*\t\3\2\2*+\7\n\2"+
-		"\2+,\7\16\2\2,-\7\13\2\2-.\7\16\2\2./\7\f\2\2/\17\3\2\2\2\5\24\33\37";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\25/\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\2\3\2\3\3\3\3\3\3"+
+		"\6\3\30\n\3\r\3\16\3\31\3\4\3\4\5\4\36\n\4\3\5\3\5\3\5\3\6\3\6\3\6\3\7"+
+		"\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\2\2\t\2\4\6\b\n\f\16\2\4\3\2\6\b"+
+		"\3\2\t\n\2)\2\20\3\2\2\2\4\27\3\2\2\2\6\35\3\2\2\2\b\37\3\2\2\2\n\"\3"+
+		"\2\2\2\f%\3\2\2\2\16\'\3\2\2\2\20\21\7\3\2\2\21\22\5\4\3\2\22\23\7\4\2"+
+		"\2\23\3\3\2\2\2\24\25\5\6\4\2\25\26\7\5\2\2\26\30\3\2\2\2\27\24\3\2\2"+
+		"\2\30\31\3\2\2\2\31\27\3\2\2\2\31\32\3\2\2\2\32\5\3\2\2\2\33\36\5\b\5"+
+		"\2\34\36\5\n\6\2\35\33\3\2\2\2\35\34\3\2\2\2\36\7\3\2\2\2\37 \5\f\7\2"+
+		" !\7\16\2\2!\t\3\2\2\2\"#\7\16\2\2#$\5\16\b\2$\13\3\2\2\2%&\t\2\2\2&\r"+
+		"\3\2\2\2\'(\t\3\2\2()\7\13\2\2)*\7\17\2\2*+\7\f\2\2+,\7\17\2\2,-\7\r\2"+
+		"\2-\17\3\2\2\2\4\31\35";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
