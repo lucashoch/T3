@@ -14,17 +14,25 @@ comando: declaracao |
          operacao
          ;
 
-declaracao: tipo VAR;
+declaracao: tipo IDENTIFICADOR |
+            'Polygon' IDENTIFICADOR '{' (declPonto ';')+ (declLinha ';')+ '}';
+            ;
 
-operacao: VAR opr;
+declPonto: IDENTIFICADOR ponto;
+declLinha: IDENTIFICADOR linha;
+ponto: 'Point' '(' NUM_REAL ',' NUM_REAL ')';
+linha: 'Line' '(' IDENTIFICADOR ',' IDENTIFICADOR ')';
 
-tipo: ('Triangle' | 'Circle' | 'Square');
+operacao: IDENTIFICADOR opr;
 
-opr: ('repeat' | 'offsetRepeat') '(' NUM ',' NUM ')';
+tipo: ('Triangle' | 'Circle' | 'Square')  ();
+
+opr: 'repeat' '(' NUM_REAL ',' NUM_REAL ')' |
+      'repeatOffset' '(';
 
 
 
-VAR: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+IDENTIFICADOR: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 NUM: NUM_INT | NUM_REAL;
 
